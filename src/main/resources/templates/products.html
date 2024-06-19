@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru" style="--bs-body-bg: #003f54;" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Товары</title>
+</head>
+<head th:insert="blocks/head :: head"></head>
+<body>
+<div th:insert="blocks/nav :: nav"></div>
+<section class="py-5">
+    <div class="container py-5">
+        <div class="row mb-4 mb-lg-5">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <h2 class="fw-bold">Товары</h2>
+            </div>
+        </div>
+        <div class="row mx-auto" style="/*max-width: 700px;*/margin-bottom: 10px;">
+            <div class="col d-xl-flex justify-content-xl-center">
+                <p class="lead">Название</p>
+            </div>
+            <div class="col d-xl-flex justify-content-xl-center">
+                <p class="lead">Цена за единицу</p>
+            </div>
+            <div class="col d-xl-flex justify-content-xl-center">
+                <p class="lead">Количество</p>
+            </div>
+            <div th:if="${role == 'CLIENT'}" class="col"></div>
+            <div th:if="${role == 'CLIENT'}" class="col-auto">
+                <button class="btn btn-primary invisible" type="button">Добавить</button>
+            </div>
+            <div th:if="${role == 'MANAGER'}" class="col-auto"><a class="btn btn-info invisible"
+                                                                  role="button">Обновить</a>
+            </div>
+            <div th:if="${role == 'MANAGER'}" class="col-auto"><a class="btn btn-danger invisible"
+                                                                  role="button">Удалить</a>
+            </div>
+        </div>
+        <form th:each="p : ${products}" th:action="'/details/add/' + ${p.id}" method="post">
+            <div class="row mx-auto" style="/*max-width: 700px;*/margin-bottom: 10px;">
+                <div class="col"><input class="form-control" type="text" readonly th:value="${p.name}"></div>
+                <div class="col"><input class="form-control" type="number" readonly th:value="${p.price}"></div>
+                <div class="col"><input class="form-control" type="number" readonly th:value="${p.quantity}"></div>
+                <div th:if="${role == 'CLIENT'}" class="col"><input class="form-control" type="number" name="quantity"
+                                                                    min="1" step="1" required
+                                                                    placeholder="Введите количество"></div>
+                <div th:if="${role == 'CLIENT'}" class="col-auto">
+                    <button class="btn btn-primary" type="submit">Добавить</button>
+                </div>
+                <div th:if="${role == 'MANAGER'}" class="col-auto"><a class="btn btn-info" role="button"
+                                                                      th:href="'/products/edit/' + ${p.id}">Обновить</a>
+                </div>
+                <div th:if="${role == 'MANAGER'}" class="col-auto"><a class="btn btn-danger" role="button"
+                                                                      th:href="'/products/delete/' + ${p.id}">Удалить</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bold-and-dark.js"></script>
+</body>
+
+</html>

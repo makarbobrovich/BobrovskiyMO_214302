@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru" style="--bs-body-bg: #003f54;" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Добавить</title>
+</head>
+<head th:insert="blocks/head :: head"></head>
+<body>
+    <div th:insert="blocks/nav :: nav"></div>
+    <section class="py-5">
+        <div class="container py-5">
+            <div class="row mb-4 mb-lg-5">
+                <div class="col-md-8 col-xl-6 text-center mx-auto">
+                    <h2 class="fw-bold">Добавить</h2>
+                </div>
+            </div>
+            <form action="/products/add" method="post">
+                <div class="row mx-auto" style="/*max-width: 700px;*/margin-bottom: 10px;">
+                    <div class="col"><input class="form-control" type="text" name="name" placeholder="Название"></div>
+                    <div class="col"><input class="form-control" type="number" name="price" min="1" step="1" placeholder="Цена за единицу"></div>
+                    <div class="col"><input class="form-control" type="number" name="quantity" min="1" step="1" placeholder="Количество"></div>
+                    <div class="col-auto"><button class="btn btn-light" type="submit">Добавить</button></div>
+                </div>
+            </form>
+        </div>
+    </section>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/bold-and-dark.js"></script>
+</body>
+
+</html>
